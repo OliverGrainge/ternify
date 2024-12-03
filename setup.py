@@ -46,6 +46,7 @@ if args.platform == 'generic':
             ['kernels/cpu/generic/matmul.cpp', 
              'kernels/cpu/generic/pack2b.cpp', 
              'kernels/cpu/generic/unpack2b.cpp',
+             'kernels/cpu/generic/matmul2b.cpp',
              'kernels/cpu/generic/bindings.cpp'],
             include_dirs=[
                 get_pybind_include(),
