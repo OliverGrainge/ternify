@@ -4,13 +4,13 @@ import ternify.tnn.functional as TF
 
 def test_pack_unpack_cpu_random():
     # Generate random input tensor
-    A = torch.randint(0, 4, (2, 7)).type(torch.int8)
+    A = torch.randint(0, 4, (2, 8)).type(torch.int8)
 
     # Apply the packing function
     B = TF.pack2b_cpu(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B, cols=7)
+    A_hat = TF.unpack2b_cpu(B)
 
     # Flatten tensors for easier element-wise comparison
     A_flat = A.flatten()
@@ -23,26 +23,26 @@ def test_pack_unpack_cpu_random():
 
 def test_pack_unpack_cpu_all_zeros():
     # Generate an input tensor of all zeros
-    A = torch.zeros((2, 7), dtype=torch.int8)
+    A = torch.zeros((2, 8), dtype=torch.int8)
 
     # Apply the packing function
     B = TF.pack2b_cpu(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B, cols=7)
+    A_hat = TF.unpack2b_cpu(B)
 
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for all zeros tensor"
 
 def test_pack_unpack_cpu_all_ones():
     # Generate an input tensor of all ones
-    A = torch.ones((2, 7), dtype=torch.int8) * 1
+    A = torch.ones((2, 8), dtype=torch.int8) * 1
 
     # Apply the packing function
     B = TF.pack2b_cpu(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B, cols=7)
+    A_hat = TF.unpack2b_cpu(B)
 
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for all ones tensor"

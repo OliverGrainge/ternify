@@ -4,6 +4,6 @@
 #include <torch/extension.h>
 
 // Function declaration
-torch::Tensor unpack2b_cpu(torch::Tensor A, int64_t cols = 0);
+torch::Tensor unpack2b_cpu(torch::Tensor A);
 
 #endif // PACK2B_H
