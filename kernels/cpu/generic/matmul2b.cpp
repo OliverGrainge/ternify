@@ -7,9 +7,7 @@ void _matmul2b_cpu(const int8_t* A, const int8_t* B_packed, int8_t* C, int64_t B
                 int32_t sum = 0;
                 for (int64_t k = 0; k < N; ++k) {
                     int64_t idx = (k * K + j);
-                    int64_t b_idx = idx / 4;
-                    int64_t shift = (idx % 4) * 2;
-                    sum += A[b * M * N + i * N + k] * (((B_packed[b_idx] >> shift) & 0b11) - 1);
+                    sum += A[b * M * N + i * N + k] * (((B_packed[idx / 4] >> (idx % 4) * 2) & 0b11) - 1);
                 }
                 C[b * M * K + i * K + j] = sum;
             }
@@ -32,7 +30,7 @@ torch::Tensor matmul2b_cpu(torch::Tensor A, torch::Tensor B) {
         M = A.size(1);
         N = A.size(2);
         K = B.size(1);
-        TORCH_CHECK(B.size(0) == N / 4, "Tensor dimensions are not compatible for matrix multiplication");
+        TORCH_CHECK(B.size(0) == N / 4, "Tensor dimensions are not compatible for matrix multiplication. B.size(0) should be A.size(1)/4");
 
         // Create an output tensor
         C = torch::zeros({BATCH, M, K}, torch::dtype(torch::kChar).device(torch::kCPU));
@@ -42,7 +40,7 @@ torch::Tensor matmul2b_cpu(torch::Tensor A, torch::Tensor B) {
         M = A.size(0);
         N = A.size(1);
         K = B.size(1);
-        TORCH_CHECK(B.size(0) == N / 4, "Tensor dimensions are not compatible for matrix multiplication");
+        TORCH_CHECK(B.size(0) == N / 4, "Tensor dimensions are not compatible for matrix multiplication. B.size(0) should be A.size(1)/4");
 
         // Create an output tensor
         C = torch::zeros({M, K}, torch::dtype(torch::kChar).device(torch::kCPU));
