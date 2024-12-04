@@ -4,10 +4,16 @@
 void _pack2b_cpu(const int8_t* A, int64_t M, int64_t N, int8_t* B) {
     #pragma omp parallel for
     for (int64_t i = 0; i < M; i++) {
-        for (int64_t j = 0; j < N; j++) {
+        for (int64_t j = 0; j < N; j += 4) {
             int64_t idx = i * N + j;
-            int64_t shift = (idx % 4) * 2; 
-            B[idx / 4] |= (A[idx] << shift);
+            int64_t packed_idx = i * ((N + 3) / 4) + j / 4;
+            int8_t packed_value = 0;
+
+            for (int k = 0; k < 4 && j + k < N; ++k) {
+                packed_value |= (A[idx + k] & 0x3) << (k * 2);
+            }
+
+            B[packed_idx] = packed_value;
         }
     }
 }
@@ -26,5 +32,3 @@ torch::Tensor pack2b_cpu(torch::Tensor A) {
     _pack2b_cpu(A.data_ptr<int8_t>(), M, N, C.data_ptr<int8_t>());
     return C;
 }
-
-
