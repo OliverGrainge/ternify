@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cstring> 
 #include <cstddef> 
+#include <iostream>
 
 void tmulbtrans(
     const int8_t* A,          // First input matrix (M x K)
@@ -17,14 +18,13 @@ void tmulbtrans(
     // Perform the matrix multiplication
     size_t C_rows = M; 
     size_t C_cols = J;
-
     for (size_t i = 0; i < C_rows; ++i) {
         for (size_t j = 0; j < C_cols; ++j) {
             int32_t sum = 0;
-            for (size_t k = 0; k < J; ++k) {
-                int idx = j * N + k;
-                int shift = (idx % 4) * 2;
-                sum += A[i * K + k] * ((B[idx] >> shift) & 0b11);
+            for (size_t k = 0; k < K; ++k) {
+                int64_t idx = j * (N*4) + k;
+                int64_t shift = (idx % 4) * 2;
+                sum += A[i * K  + k] * (((B[idx/4] >> shift) & 0b11) - 1);
             }
             C[i * C_cols + j] = sum;
         }

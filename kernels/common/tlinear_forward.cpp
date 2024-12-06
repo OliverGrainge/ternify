@@ -28,7 +28,7 @@ torch::Tensor tlinear_forward(
     int32_t* Y_data = Y.data_ptr<int32_t>();
 
     // Call the tmulbtrans function
-    tmulbtrans(X_data, W_data, Y_data, X.size(0), X.size(1), Y.size(0), Y.size(1));
+    tmulbtrans(X_data, W_data, Y_data, X.size(0), X.size(1), W_packed.size(0), W_packed.size(1));
 
     // Add bias if provided
     if (bias.defined()) {
