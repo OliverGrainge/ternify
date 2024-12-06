@@ -13,11 +13,12 @@ torch::Tensor linear_forward(
     TORCH_CHECK(!bias.defined() || bias.dim() == 1, "Bias must be a 1D vector or None");
 
     // Get dimensions
-    auto M = X.size(0);  // Number of samples
+    auto M = X.size(0);  // Batch size
     auto K = X.size(1);  // in_features
-    auto N = W.size(1);  // out features
+    auto N = W.size(0);  // out_features
 
-    TORCH_CHECK(K == N, "Inner dimensions must match for multiplication");
+    // Check for correct dimensions
+    TORCH_CHECK(K == W.size(1), "The number of input features in X must match the number of input features in W");
 
     // Allocate output tensor
     auto Y = torch::zeros({M, N}, torch::TensorOptions().dtype(X.dtype()).device(X.device()));
@@ -32,10 +33,8 @@ torch::Tensor linear_forward(
 
     // Add bias if provided
     if (bias.defined()) {
-        Y.add_(bias.unsqueeze(1));
+        Y.add_(bias);
     }
 
     return Y;
 }
-
-

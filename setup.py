@@ -44,6 +44,8 @@ if args.platform == 'generic':
         Extension(
             'functional',
             ['kernels/common/primitives/sgemm.cpp', 
+             'kernels/common/bitpack8to2.cpp',
+             'kernels/common/bitunpack8to2.cpp',
              'kernels/common/linear_forward.cpp',
              'kernels/common/bindings.cpp'],
             include_dirs=[
