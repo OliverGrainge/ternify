@@ -43,11 +43,9 @@ if args.platform == 'generic':
     ext_modules.append(
         Extension(
             'functional',
-            ['kernels/cpu/generic/matmul.cpp', 
-             'kernels/cpu/generic/pack2b.cpp', 
-             'kernels/cpu/generic/unpack2b.cpp',
-             'kernels/cpu/generic/matmul2b.cpp',
-             'kernels/cpu/generic/bindings.cpp'],
+            ['kernels/common/primitives/sgemm.cpp', 
+             'kernels/common/linear_forward.cpp',
+             'kernels/common/bindings.cpp'],
             include_dirs=[
                 get_pybind_include(),
                 get_pybind_include(user=True)
@@ -58,36 +56,6 @@ if args.platform == 'generic':
     )
 
 
-
-
-elif args.platform == 'arm':
-    ext_modules.append(
-        Extension(
-            'functional',
-            ['kernels/cpu/arm/matmul.cpp'],
-            include_dirs=[
-                get_pybind_include(),
-                get_pybind_include(user=True)
-            ] + torch_include_dirs,
-            language='c++',
-            extra_compile_args=['-std=c++17', '-fvisibility=hidden'],
-        )
-    )
-
-    # Add CUDA extension if CUDA is available
-if cuda_available:
-    ext_modules.append(
-        torch.utils.cpp_extension.CUDAExtension(
-            'functional_cuda',
-            ['kernels/gpu/matmul.cu'],
-            include_dirs=[
-                get_pybind_include(),
-                get_pybind_include(user=True)
-            ] + torch_include_dirs,
-            extra_compile_args={'cxx': ['-std=c++17', '-fvisibility=hidden'],
-                                'nvcc': ['-O2']},
-        )
-    )
 
 setup(
     name='floating_point_kernels',

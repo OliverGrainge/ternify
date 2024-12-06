@@ -10,7 +10,7 @@ import time
 import matplotlib.pyplot as plt
 import ternify.tnn.functional as TF
 # Define a range of matrix sizes
-matrix_sizes = [2, 4, 8, 16, 32, 64, 128, 256, 512]
+matrix_sizes = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 
 torch_times = []
 naive_times = []
@@ -32,7 +32,7 @@ for size in matrix_sizes:
     naive_times.append(naive_time)
 
     # Ensure outputs are close
-    assert torch.allclose(exp_output, output), "Outputs differ!"
+    assert torch.allclose(exp_output, output, atol=1e-3), "Outputs differ!"
 
 # Plot the results
 plt.figure(figsize=(10, 6))

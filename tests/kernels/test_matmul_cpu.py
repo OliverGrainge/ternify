@@ -136,5 +136,20 @@ def test_naive_matmul_identity_batched():
     # Assert that the output matches the expected result
     assert torch.allclose(output, expected_output), "The output of naive_matmul is incorrect when using a batched identity matrix."
 
+def test_matmul_cpu_v_torch(): 
+    A = torch.randn(10, 10)
+    B = torch.randn(10, 10)
+    C = torch.matmul(A, B)
+    C_hat = TF.matmul_cpu(A, B)
+    assert torch.allclose(C, C_hat)
+
+
+def test_matmul_cpu_v_torch_batched(): 
+    A = torch.randn(3, 10, 10)
+    B = torch.randn(10, 10)
+    C = torch.matmul(A, B)
+    C_hat = TF.matmul_cpu(A, B)
+    assert torch.allclose(C, C_hat)
+
 if __name__ == "__main__":
     pytest.main()
