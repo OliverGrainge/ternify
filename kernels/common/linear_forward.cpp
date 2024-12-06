@@ -25,7 +25,7 @@ torch::Tensor linear_forward(
     float* Y_data = Y.data_ptr<float>();
 
     // Call the SGEMM function
-    sgemm(X_data, W_data, Y_data, X.size(0), X.size(1), W.size(0),W.size(1), 1.0f, 0.0f, true);
+    sgemm(X_data, W_data, Y_data, X.size(0), X.size(1), W.size(0),W.size(1), 1.0f, 0.0f, false, true);
 
     // Add bias if provided
     if (bias.defined()) {

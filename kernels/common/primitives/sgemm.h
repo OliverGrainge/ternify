@@ -13,7 +13,8 @@ void sgemm(
     size_t N,   // Number of columns in B
     float alpha,             // Scalar multiplier for A* B
     float beta,              // Scalar multiplier for C (if accumulation is needed)
-    bool transB              // Whether to transpose B
+    bool transA,            // Whether A is transposed
+    bool transB              // Whether B is transposed
 );
 
 #endif // SGEMM_H
