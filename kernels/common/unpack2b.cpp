@@ -5,7 +5,6 @@ void _unpack2b_cpu(const int8_t* A, int64_t M, int64_t N, int8_t* B) {
     for (int64_t i = 0; i < M; ++i) {
         for (int64_t j = 0; j < N; ++j) {
             int64_t idx = i * N + j;
-            int64_t byte_idx = idx / 4;
             int64_t shift = (3 - (j % 4)) * 2;
             B[idx] = (A[idx/4] >> shift) & 0b11;
         }

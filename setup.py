@@ -44,7 +44,7 @@ if args.platform == 'generic':
         Extension(
             'functional',
             ['kernels/common/primitives/sgemm.cpp', 
-             'kernels/common/primitives/tmulbtrans.cpp',
+             'kernels/common/primitives/tgemm.cpp',
              'kernels/common/pack2b.cpp',
              'kernels/common/unpack2b.cpp',
              'kernels/common/linear_forward.cpp',
