@@ -14,18 +14,22 @@ void tmulbtrans(
     size_t N   // Number of columns in B
 ) {
     assert(A != nullptr && B != nullptr && C != nullptr);
-
     // Perform the matrix multiplication
-    size_t C_rows = M; 
-    size_t C_cols = J;
-    for (size_t i = 0; i < C_rows; ++i) {
-        for (size_t j = 0; j < C_cols; ++j) {
+    int64_t C_rows = M; 
+    int64_t C_cols = J; 
+    std::cout << "C_rows = " << C_rows << ", C_cols = " << C_cols << std::endl;
+    std::cout << "M = " << M << ", K = " << K << ", J = " << J << ", N = " << N << std::endl;
+    for (int64_t i = 0; i < C_rows; ++i) {
+        for (int64_t j = 0; j < C_cols; ++j) {
             int32_t sum = 0;
-            for (size_t k = 0; k < K; ++k) {
-                int64_t idx = j * (N*4) + k;
-                int64_t shift = (idx % 4) * 2;
-                sum += A[i * K  + k] * (((B[idx/4] >> shift) & 0b11) - 1);
+            for (int64_t k = 0; k < K; ++k) {
+                int64_t idx = j * K + k;
+                int8_t val = ((B[idx/4] >> ((3 - (idx % 4)) * 2)) & 0b11) - 1;
+                int32_t tmp = static_cast<int32_t>(A[i * K + k]) * static_cast<int32_t>(val);
+                sum += tmp;
+                std::cout << " idx: " << idx << " A: " << static_cast<int>(A[i * K + k]) << " B: " << static_cast<int>(val) << " tmp: " << tmp << " sum: " << sum << std::endl;
             }
+            std::cout << "idx: " << i * C_cols + j << " sum: " << sum << std::endl;
             C[i * C_cols + j] = sum;
         }
     }

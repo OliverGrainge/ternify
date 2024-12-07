@@ -1,22 +1,18 @@
 #include "pack2b.h"
-#include <omp.h>
 
 void _pack2b_cpu(const int8_t* A, int64_t M, int64_t N, int8_t* B) {
-    #pragma omp parallel for
     for (int64_t i = 0; i < M; i++) {
         for (int64_t j = 0; j < N; j += 4) {
-            int64_t idx = i * N + j;
-            int64_t packed_idx = i * ((N + 3) / 4) + j / 4;
             int8_t packed_value = 0;
-
-            for (int k = 0; k < 4 && j + k < N; ++k) {
-                packed_value |= (A[idx + k] & 0x3) << (k * 2);
+            for (int k = 0; k < 4 && (j + k) < N; k++) {
+                int64_t shift = (3 - k) * 2;
+                packed_value |= (A[i * N + j + k] & 0x3) << shift;
             }
-
-            B[packed_idx] = packed_value;
+            B[i * ((N + 3) / 4) + j / 4] = packed_value;
         }
     }
 }
+
 
 torch::Tensor pack2b_cpu(torch::Tensor A) {
     TORCH_CHECK(A.device().is_cpu(), "Tensor 'A' must be on CPU");
