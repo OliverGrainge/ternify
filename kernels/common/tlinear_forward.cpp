@@ -30,9 +30,9 @@ torch::Tensor tlinear_forward(
     tmulbtrans(X_data, W_data, Y_data, X.size(0), X.size(1), W_packed.size(0), W_packed.size(1));
 
     // Add bias if provided
-    //if (bias.defined()) {
-    //    Y.add_(bias);
-    //}
+    if (bias.defined()) {
+        Y.add_(bias);
+    }
 
     return Y;
 }
