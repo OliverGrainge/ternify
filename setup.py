@@ -43,11 +43,9 @@ if args.platform == 'generic':
     ext_modules.append(
         Extension(
             'functional',
-            ['kernels/common/primitives/sgemm.cpp', 
-             'kernels/common/primitives/tgemm.cpp',
+            ['kernels/common/primitives/tgemm.cpp',
              'kernels/common/pack2b.cpp',
              'kernels/common/unpack2b.cpp',
-             'kernels/common/linear_forward.cpp',
              'kernels/common/tlinear_forward.cpp',
              'kernels/common/bindings.cpp'],
             include_dirs=[
@@ -55,7 +53,27 @@ if args.platform == 'generic':
                 get_pybind_include(user=True)
             ] + torch_include_dirs,
             language='c++',
-            extra_compile_args=['-std=c++17', '-fvisibility=hidden'],
+            extra_compile_args=['-std=c++17'],
+            extra_link_args=['-lomp'],
+        )
+    )
+
+elif args.platform == 'arm':
+    ext_modules.append(
+        Extension(
+            'functional',
+            ['kernels/neon/primitives/tgemm.cpp',
+             'kernels/neon/pack2b.cpp',
+             'kernels/neon/unpack2b.cpp',
+             'kernels/neon/tlinear_forward.cpp',
+             'kernels/neon/bindings.cpp'],
+            include_dirs=[
+                get_pybind_include(),
+                get_pybind_include(user=True)
+            ] + torch_include_dirs,
+            language='c++',
+            extra_compile_args=['-std=c++17', '-fvisibility=hidden', '-O2', '-Xpreprocessor', '-fopenmp'],
+            extra_link_args=['-lomp'],
         )
     )
 
