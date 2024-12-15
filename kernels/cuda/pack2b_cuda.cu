@@ -22,7 +22,7 @@ __global__ void _pack2b_kernel(const int8_t *d_A, int64_t M, int64_t N, int8_t *
     }
 }
 
-void _pack2b_cuda(const int8_t *d_A, int64_t M, int64_t N, int8_t *d_B)
+extern "C" void _pack2b_cuda(const int8_t *d_A, int64_t M, int64_t N, int8_t *d_B)
 {
     dim3 blockDim(16, 16);                                                                  // Configure block size
     dim3 gridDim((N / 4 + blockDim.x - 1) / blockDim.x, (M + blockDim.y - 1) / blockDim.y); // Configure grid size

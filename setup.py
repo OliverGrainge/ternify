@@ -30,25 +30,11 @@ cuda_sources = [
 
 extensions = []
 
-# Add CPU extension
-extensions.append(
-    CppExtension(
-        name='ternify.tnn.functional',
-        sources=common_sources,
-        include_dirs=[
-            os.path.abspath('kernels'),
-            os.path.abspath('kernels/common'),
-        ],
-        extra_compile_args=['-std=c++17', '-fopenmp'],
-        extra_link_args=['-lgomp'],
-    )
-)
-
-# Add CUDA extension if CUDA is available
 if use_cuda:
+    # Single combined extension with both CPU and CUDA code
     extensions.append(
         CUDAExtension(
-            name='ternify.tnn.functional_cuda',
+            name='ternify.tnn.functional',  # Note: single extension name
             sources=common_sources + cuda_sources,
             include_dirs=[
                 os.path.abspath('kernels'),
@@ -56,9 +42,23 @@ if use_cuda:
                 os.path.abspath('kernels/cuda'),
             ],
             extra_compile_args={
-                'cxx': ['-std=c++17', '-DUSE_CUDA', '-fopenmp'],  # Add USE_CUDA macro for the CPU part
-                'nvcc': ['-DUSE_CUDA'],  # Add USE_CUDA macro for the CUDA part
+                'cxx': ['-std=c++17', '-DUSE_CUDA', '-fopenmp'],
+                'nvcc': ['-DUSE_CUDA'],
             },
+            extra_link_args=['-lgomp'],
+        )
+    )
+else:
+    # CPU-only extension
+    extensions.append(
+        CppExtension(
+            name='ternify.tnn.functional',
+            sources=common_sources,
+            include_dirs=[
+                os.path.abspath('kernels'),
+                os.path.abspath('kernels/common'),
+            ],
+            extra_compile_args=['-std=c++17', '-fopenmp'],
             extra_link_args=['-lgomp'],
         )
     )
