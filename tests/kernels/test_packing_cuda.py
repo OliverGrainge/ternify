@@ -2,6 +2,12 @@ import pytest
 import torch
 import ternify.tnn.functional as TF
 
+cuda_available = pytest.mark.skipif(
+    not torch.cuda.is_available(),
+    reason="CUDA not available"
+)
+
+@cuda_available
 def test_pack_unpack_cuda_random():
     # Generate random input tensor
     A = torch.randint(0, 4, (2, 8)).type(torch.int8).cuda()
@@ -21,6 +27,7 @@ def test_pack_unpack_cuda_random():
     for i in range(A_flat.shape[0]):
         assert A_flat[i].item() == A_hat_flat[i].item(), f"Mismatch at index {i}: {A_flat[i].item()} != {A_hat_flat[i].item()}"
 
+@cuda_available
 def test_pack_unpack_cuda_all_zeros():
     # Generate an input tensor of all zeros
     A = torch.zeros((2, 8), dtype=torch.int8).cuda()
@@ -34,6 +41,7 @@ def test_pack_unpack_cuda_all_zeros():
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for all zeros tensor"
 
+@cuda_available
 def test_pack_unpack_cuda_all_ones():
     # Generate an input tensor of all ones
     A = torch.ones((2, 8), dtype=torch.int8).cuda() * 1
@@ -48,6 +56,7 @@ def test_pack_unpack_cuda_all_ones():
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for all ones tensor"
 
+@cuda_available
 def test_pack_unpack_cuda_large_tensor():
     # Generate a large random input tensor
     A = torch.randint(0, 4, (100, 100)).type(torch.int8).cuda()
@@ -61,6 +70,7 @@ def test_pack_unpack_cuda_large_tensor():
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for large tensor"
 
+@cuda_available
 def test_pack_unpack_cuda_edge_values():
     # Generate an input tensor with edge values (0 and 3)
     A = torch.tensor([[0, 3, 0, 3], [3, 0, 3, 0]], dtype=torch.int8).cuda()
