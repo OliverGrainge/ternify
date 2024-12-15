@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
 from torch.utils.cpp_extension import CppExtension, BuildExtension
+import os 
 
 setup(
     name='ternify',  # Package name
@@ -20,8 +21,8 @@ setup(
                 'kernels/bindings.cpp',
             ],
             include_dirs=[
-                'kernels',  # Add your include directories here
-                'kernels/common',
+                os.path.abspath('kernels'),
+                os.path.abspath('kernels/common'),
             ],
             extra_compile_args=['-std=c++17', '-fopenmp'],
             extra_link_args=['-lgomp'],
