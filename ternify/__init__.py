@@ -1,1 +1,1 @@
-from ternify.tnn.functional import tlinear_forward, pack2b_cpu, unpack2b_cpu
+from ternify.tnn.functional import tlinear_forward, pack2b, unpack2b

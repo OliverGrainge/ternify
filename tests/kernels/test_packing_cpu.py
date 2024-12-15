@@ -7,10 +7,10 @@ def test_pack_unpack_cpu_random():
     A = torch.randint(0, 4, (2, 8)).type(torch.int8)
 
     # Apply the packing function
-    B = TF.pack2b_cpu(A)
+    B = TF.pack2b(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B)
+    A_hat = TF.unpack2b(B)
 
     # Flatten tensors for easier element-wise comparison
     A_flat = A.flatten()
@@ -26,10 +26,10 @@ def test_pack_unpack_cpu_all_zeros():
     A = torch.zeros((2, 8), dtype=torch.int8)
 
     # Apply the packing function
-    B = TF.pack2b_cpu(A)
+    B = TF.pack2b(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B)
+    A_hat = TF.unpack2b(B)
 
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for all zeros tensor"
@@ -39,10 +39,10 @@ def test_pack_unpack_cpu_all_ones():
     A = torch.ones((2, 8), dtype=torch.int8) * 1
 
     # Apply the packing function
-    B = TF.pack2b_cpu(A)
+    B = TF.pack2b(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B)
+    A_hat = TF.unpack2b(B)
 
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for all ones tensor"
@@ -52,10 +52,10 @@ def test_pack_unpack_cpu_large_tensor():
     A = torch.randint(0, 4, (100, 100)).type(torch.int8)
 
     # Apply the packing function
-    B = TF.pack2b_cpu(A)
+    B = TF.pack2b(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B)
+    A_hat = TF.unpack2b(B)
 
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for large tensor"
@@ -65,10 +65,10 @@ def test_pack_unpack_cpu_edge_values():
     A = torch.tensor([[0, 3, 0, 3], [3, 0, 3, 0]], dtype=torch.int8)
 
     # Apply the packing function
-    B = TF.pack2b_cpu(A)
+    B = TF.pack2b(A)
 
     # Unpack the packed tensor
-    A_hat = TF.unpack2b_cpu(B)
+    A_hat = TF.unpack2b(B)
 
     # Verify that the original and unpacked tensors are equal
     assert torch.equal(A, A_hat), "Unpacking failed for tensor with edge values"

@@ -11,11 +11,17 @@ setup(
         CppExtension(
             name='ternify.tnn.functional',  # Full module path
             sources=[
-                'kernels/common/tlinear_forward.cpp',
-                'kernels/common/primitives/tgemm.cpp',
-                'kernels/common/pack2b.cpp',
-                'kernels/common/unpack2b.cpp',
-                'kernels/common/bindings.cpp',
+                'kernels/common/tgemm_cpu.cpp',
+                'kernels/common/pack2b_cpu.cpp',
+                'kernels/common/unpack2b_cpu.cpp',
+                'kernels/pack2b.cpp',
+                'kernels/unpack2b.cpp',
+                'kernels/tlinear_forward.cpp',
+                'kernels/bindings.cpp',
+            ],
+            include_dirs=[
+                'kernels',  # Add your include directories here
+                'kernels/common',
             ],
             extra_compile_args=['-std=c++17', '-fopenmp'],
             extra_link_args=['-lgomp'],
