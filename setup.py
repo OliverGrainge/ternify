@@ -11,11 +11,11 @@ setup(
         CppExtension(
             name='ternify.tnn.functional',  # Full module path
             sources=[
-                'ternify/tnn/src/kernels/common/tlinear_forward.cpp',
-                'ternify/tnn/src/kernels/common/primitives/tgemm.cpp',
-                'ternify/tnn/src/kernels/common/pack2b.cpp',
-                'ternify/tnn/src/kernels/common/unpack2b.cpp',
-                'ternify/tnn/src/kernels/common/bindings.cpp',
+                'kernels/common/tlinear_forward.cpp',
+                'kernels/common/primitives/tgemm.cpp',
+                'kernels/common/pack2b.cpp',
+                'kernels/common/unpack2b.cpp',
+                'kernels/common/bindings.cpp',
             ],
             extra_compile_args=['-std=c++17', '-fopenmp'],
             extra_link_args=['-lgomp'],
