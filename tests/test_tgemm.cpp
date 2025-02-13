@@ -44,7 +44,7 @@ TEST_F(TGemmTest, BasicMultiplication) {
     tgemm_pack_weights(A_raw.data(), A_packed.data(), M, K);
 
     // For the packed matrix, the leading dimension (lda) is K/4.
-    tgemm(reinterpret_cast<const int8_t*>(A_packed.data()), B.data(), C.data(),
+    tgemm(reinterpret_cast<const uint8_t*>(A_packed.data()), B.data(), C.data(),
           M, N, K, K / 4, N, N);
 
     // Each element in C is the dot product of a row of ones with a column of ones:
@@ -64,7 +64,7 @@ TEST_F(TGemmTest, ZeroMultiplication) {
     std::vector<uint8_t> A_packed(M * (K / 4), 0);
     tgemm_pack_weights(A_raw.data(), A_packed.data(), M, K);
 
-    tgemm(reinterpret_cast<const int8_t*>(A_packed.data()), B.data(), C.data(),
+    tgemm(reinterpret_cast<const uint8_t*>(A_packed.data()), B.data(), C.data(),
           M, N, K, K / 4, N, N);
 
     verifyResult(C.data(), M, N, 0);
@@ -101,13 +101,13 @@ TEST_F(TGemmTest, NullPointers) {
     );
     // Passing nullptr for B.
     EXPECT_THROW(
-        tgemm(reinterpret_cast<const int8_t*>(A_packed.data()), nullptr, C.data(),
+        tgemm(reinterpret_cast<const uint8_t*>(A_packed.data()), nullptr, C.data(),
             M, N, K, K / 4, N, N),
         std::invalid_argument
     );
     // Passing nullptr for C.
     EXPECT_THROW(
-        tgemm(reinterpret_cast<const int8_t*>(A_packed.data()), B.data(), nullptr,
+        tgemm(reinterpret_cast<const uint8_t*>(A_packed.data()), B.data(), nullptr,
             M, N, K, K / 4, N, N),
         std::invalid_argument
     );

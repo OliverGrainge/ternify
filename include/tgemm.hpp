@@ -20,7 +20,7 @@
  * @param ldb Leading dimension of matrix B
  * @param ldc Leading dimension of matrix C
  */
-void tgemm(const int8_t* A_packed, const int8_t* B, int32_t* C,
+void tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
            int M, int N, int K,
            int lda, int ldb, int ldc);
 

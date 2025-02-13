@@ -23,7 +23,7 @@
  * @param ldb      Leading dimension for B.
  * @param ldc      Leading dimension for C.
  */
-void common_tgemm(const int8_t* A_packed, const int8_t* B, int32_t* C,
+void common_tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
                   int M, int N, int K,
                   int lda, int ldb, int ldc) {
     // Ensure that K is divisible by 4, as required by the packing scheme.

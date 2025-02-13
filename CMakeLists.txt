@@ -8,12 +8,25 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include the header directory.
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+# Set output directories for all targets
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+# Add this to ensure proper output paths on multi-configuration generators (like Visual Studio)
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/lib)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/lib)
+endforeach()
+
 # ========================== Common executable ==========================
 # Base library without NEON
 add_library(ternary_gemm_base
     src/backend/common_tgemm.cpp
+    src/tgemm_pack_weights.cpp
     src/tgemm.cpp
-    src/tgemm_pack_weights.cpp  # Add this line
 )
 
 add_executable(benchmark_baseline
@@ -28,6 +41,7 @@ target_link_libraries(benchmark_baseline
 # NEON-specific library
 add_library(ternary_gemm_neon
     src/backend/common_tgemm.cpp
+    src/tgemm_pack_weights.cpp
     src/tgemm.cpp
 )
 

@@ -8,7 +8,7 @@
 
 // The high-level GEMM operator which optionally fuses bias and requantization.
 // It dispatches to the appropriate backend if available.
-void tgemm(const int8_t* A_packed, const int8_t* B, int32_t* C,
+void tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
           int M, int N, int K,
           int lda, int ldb, int ldc) {
 
