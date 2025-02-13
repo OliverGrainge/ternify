@@ -73,9 +73,9 @@ TEST_F(TGemmPackWeightsTest, ColumnsNotDivisibleBy4) {
     std::vector<uint8_t> packed_weights(rows * ((cols + 3) / 4), 0);
 
     // Using EXPECT_DEATH to catch the assertion failure.
-    EXPECT_DEATH(
+    EXPECT_THROW(
         tgemm_pack_weights(input_weights.data(), packed_weights.data(), rows, cols),
-        "Number of columns must be divisible by 4."
+        std::invalid_argument
     );
 }
 
@@ -87,8 +87,8 @@ TEST_F(TGemmPackWeightsTest, InvalidWeightValue) {
     std::vector<int8_t> input_weights = { -1, 0, 2, 0 };
     std::vector<uint8_t> packed_weights(rows * (cols / 4), 0);
 
-    EXPECT_DEATH(
+    EXPECT_THROW(
         tgemm_pack_weights(input_weights.data(), packed_weights.data(), rows, cols),
-        "Input weight must be -1, 0, or 1"
+        std::invalid_argument
     );
 }

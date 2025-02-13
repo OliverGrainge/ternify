@@ -13,6 +13,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_library(ternary_gemm_base
     src/backend/common_tgemm.cpp
     src/tgemm.cpp
+    src/tgemm_pack_weights.cpp  # Add this line
 )
 
 add_executable(benchmark_baseline
@@ -61,7 +62,7 @@ FetchContent_MakeAvailable(googletest)
 # Create test executable
 add_executable(tgemm_tests
     tests/test_tgemm.cpp
-    tests/test_pack_weights.cpp
+    tests/test_tgemm_pack_weights.cpp
 )
 
 target_link_libraries(tgemm_tests

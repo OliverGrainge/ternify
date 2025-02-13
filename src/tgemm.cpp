@@ -13,7 +13,7 @@ void tgemm(const int8_t* A_packed, const int8_t* B, int32_t* C,
           int lda, int ldb, int ldc) {
 
     if (!A_packed || !B || !C) {
-        throw std::invalid_argument("Input matrices cannot be null");
+        throw std::invalid_argument("Input pointers must not be null.");
     }
     
     if (M <= 0 || N <= 0 || K <= 0) {
