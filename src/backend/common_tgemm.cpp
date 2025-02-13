@@ -34,33 +34,19 @@ void common_tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
         // Iterate over each column of B.
         for (int j = 0; j < N; ++j) {
             int32_t sum = 0;
+
+            
             // Process each of the original K weights.
-            for (int k = 0; k < K; ++k) {
+            for (int k = 0; k < K; k += 4) {
                 // Compute the index of the byte in the packed A.
-                int byte_index = i * lda + (k / 4);
-                uint8_t packed_byte = static_cast<uint8_t>(A_packed[byte_index]);
-                // Determine the bit shift needed to extract the 2-bit weight.
-                int shift = 6 - 2 * (k % 4);
-                uint8_t two_bit = (packed_byte >> shift) & 0x03;
+                uint8_t packed_byte = static_cast<uint8_t>(A_packed[i * lda + (k / 4)]);
 
-                // Decode the 2-bit weight to its actual ternary value.
-                int8_t a_val;
-                if (two_bit == 0b00) {
-                    a_val = -1;
-                } else if (two_bit == 0b01) {
-                    a_val = 0;
-                } else if (two_bit == 0b10) {
-                    a_val = 1;
-                } else {
-                    // This should not happen if A_packed was produced by the packer.
-                    assert(false && "Invalid 2-bit weight encountered in A_packed.");
-                    a_val = 0; // To silence compiler warnings.
-                }
-
-                // Multiply the unpacked A value with the corresponding B element.
-                int8_t b_val = B[k * ldb + j];
-                sum += static_cast<int32_t>(a_val) * static_cast<int32_t>(b_val);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 6) & 0x03) - 1) * static_cast<int32_t>(B[k * ldb + j]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 4) & 0x03) - 1) * static_cast<int32_t>(B[(k + 1) * ldb + j]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 2) & 0x03) - 1) * static_cast<int32_t>(B[(k + 2) * ldb + j]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte) & 0x03) - 1) * static_cast<int32_t>(B[(k + 3) * ldb + j]);
             }
+
             // Store the result in matrix C.
             C[i * ldc + j] = sum;
         }
