@@ -42,7 +42,7 @@ void run_benchmark_comparison(int M, int N, int K, int iterations, std::ofstream
         A_blas[i] = static_cast<float>(val);
     }
     for (int i = 0; i < K * N; i++) {
-        int8_t val = static_cast<int8_t>((rand() % 3) - 1); // Will generate -1, 0, or 1
+        int8_t val = static_cast<int8_t>((rand() % 3) - 1);
         B_tgemm[i] = val;
         B_blas[i] = static_cast<float>(val);
     }
