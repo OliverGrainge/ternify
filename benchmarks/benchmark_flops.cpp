@@ -6,6 +6,7 @@
 #include <cblas.h>
 
 #include "../include/tgemm.hpp"
+#include "../include/tgemm_pack_weights.hpp"
 
 std::string get_implementation_type() {
     std::string impl = "common";
@@ -24,8 +25,9 @@ void run_benchmark_comparison(int M, int N, int K, int iterations, std::ofstream
     const int ldc = N;
 
     // Allocate matrices for TGEMM
-    std::vector<uint8_t> A_tgemm(M * K);
+    std::vector<int8_t> A_tgemm(M * K);
     std::vector<int8_t> B_tgemm(K * N);
+    std::vector<uint8_t> B_tgemm_packed(K * (N/4));
     std::vector<int32_t> C_tgemm(M * N, 0);
 
     // Allocate matrices for BLAS (using float for cblas_sgemm)
@@ -40,13 +42,13 @@ void run_benchmark_comparison(int M, int N, int K, int iterations, std::ofstream
         A_blas[i] = static_cast<float>(val);
     }
     for (int i = 0; i < K * N; i++) {
-        int8_t val = static_cast<int8_t>((rand() % 256) - 128);
+        int8_t val = static_cast<int8_t>((rand() % 3) - 1); // Will generate -1, 0, or 1
         B_tgemm[i] = val;
         B_blas[i] = static_cast<float>(val);
     }
-
+    tgemm_pack_weights(B_tgemm.data(), B_tgemm_packed.data(), K, N);
     // Warm-up calls
-    tgemm(A_tgemm.data(), B_tgemm.data(), C_tgemm.data(), M, N, K, lda, ldb, ldc);
+    tgemm(A_tgemm.data(), B_tgemm_packed.data(), C_tgemm.data(), M, N, K, lda, ldb, ldc);
     cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
                 M, N, K, 1.0f,
                 A_blas.data(), lda,
@@ -56,7 +58,7 @@ void run_benchmark_comparison(int M, int N, int K, int iterations, std::ofstream
     // Benchmark TGEMM
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < iterations; i++) {
-        tgemm(A_tgemm.data(), B_tgemm.data(), C_tgemm.data(), M, N, K, lda, ldb, ldc);
+        tgemm(A_tgemm.data(), B_tgemm_packed.data(), C_tgemm.data(), M, N, K, lda, ldb, ldc);
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed_tgemm = end - start;

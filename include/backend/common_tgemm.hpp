@@ -17,7 +17,7 @@
  * @param ldb Leading dimension (stride) for matrix B.
  * @param ldc Leading dimension (stride) for matrix C.
  */
-void common_tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
+void common_tgemm(const int8_t* A, const uint8_t* B_packed, int32_t* C,
           int M, int N, int K,
           int lda, int ldb, int ldc);
 

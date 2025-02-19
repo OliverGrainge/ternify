@@ -24,7 +24,7 @@
  * @param ldb      Leading dimension for B.
  * @param ldc      Leading dimension for C.
  */
-void common_tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
+void common_tgemm(const int8_t* A, const uint8_t* B_packed, int32_t* C,
                   int M, int N, int K,
                   int lda, int ldb, int ldc) {
     // Ensure that K is divisible by 4, as required by the packing scheme.
@@ -37,16 +37,20 @@ void common_tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
         for (int n = 0; n < N; ++n) {
             int32_t sum = 0;
 
+            // shape of A is M x K
+            // shape of B is K x N 
+            // shape of B_packed is K x (N/4)
+            // shape of C is M x N
             
             // Process each of the original K weights.
             for (int k = 0; k < K; k += 4) {
                 // Compute the index of the byte in the packed A.
-                uint8_t packed_byte = static_cast<uint8_t>(A_packed[m * lda + (k / 4)]);
+                uint8_t packed_byte = static_cast<uint8_t>(B_packed[m * (K/4) + (k/4)]);
 
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 6) & 0x03) - 1) * static_cast<int32_t>(B[k * ldb + m]);
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 4) & 0x03) - 1) * static_cast<int32_t>(B[(k + 1) * ldb + m]);
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 2) & 0x03) - 1) * static_cast<int32_t>(B[(k + 2) * ldb + m]);
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte) & 0x03) - 1) * static_cast<int32_t>(B[(k + 3) * ldb + m]);
+                sum += static_cast<int32_t>(A[m * K + k]) * static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 6) & 0x03) - 1);
+                sum += static_cast<int32_t>(A[m * K + k + 1]) * static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 4) & 0x03) - 1);
+                sum += static_cast<int32_t>(A[m * K + k + 2]) * static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 2) & 0x03) - 1);
+                sum += static_cast<int32_t>(A[m * K + k + 3]) * static_cast<int32_t>(static_cast<int8_t>((packed_byte) & 0x03) - 1);
             }
 
             // Store the result in matrix C.

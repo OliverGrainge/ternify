@@ -8,11 +8,11 @@
 
 // The high-level GEMM operator which optionally fuses bias and requantization.
 // It dispatches to the appropriate backend if available.
-void tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
+void tgemm(const int8_t* A, const uint8_t* B_packed, int32_t* C,
           int M, int N, int K,
           int lda, int ldb, int ldc) {
 
-    if (!A_packed || !B || !C) {
+    if (!A || !B_packed || !C) {
         throw std::invalid_argument("Input pointers must not be null.");
     }
     
@@ -29,7 +29,7 @@ void tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
     throw std::runtime_error("NEON GEMM implementation not yet available");
 #else
     // Fallback: a simple reference implementation
-    common_tgemm(A_packed, B, C, M, N, K, lda, ldb, ldc);
+    common_tgemm(A, B_packed, C, M, N, K, lda, ldb, ldc);
 #endif
 }
 
