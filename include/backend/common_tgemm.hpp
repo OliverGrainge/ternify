@@ -5,17 +5,25 @@
 
 
 /**
- * @brief Performs a basic GEMM operation: C = A * B.
+ * @brief Matrix multiplication using a packed ternary weight matrix.
  *
- * @param A   Pointer to the first input matrix (size: M x K) in row-major order.
- * @param B   Pointer to the second input matrix (size: K x N) in row-major order.
- * @param C   Pointer to the output matrix (size: M x N) in row-major order.
- * @param M   Number of rows in matrix A and C.
- * @param N   Number of columns in matrix B and C.
- * @param K   Number of columns in matrix A and rows in matrix B.
- * @param lda Leading dimension (stride) for matrix A.
- * @param ldb Leading dimension (stride) for matrix B.
- * @param ldc Leading dimension (stride) for matrix C.
+ * The right-hand side matrix B is stored in a packed 2-bit per weight format,
+ * where every byte holds 4 weights (packed in row-major order). The ternary
+ * weights are encoded as:
+ *   -1 -> 0b00
+ *    0 -> 0b01
+ *    1 -> 0b10
+ *
+ * @param A        Pointer to matrix A (int8_t elements).
+ * @param B_packed Pointer to the packed B matrix (each row has K/4 bytes).
+ * @param C        Pointer to the output matrix C (int32_t elements).
+ * @param M        Number of rows in matrix A.
+ * @param N        Number of columns in matrix B.
+ * @param K        The inner dimension (number of columns in A / rows in B).
+ *                 Must be divisible by 4.
+ * @param lda      Leading dimension for A.
+ * @param ldb      Leading dimension for B (before packing).
+ * @param ldc      Leading dimension for C.
  */
 void common_tgemm(const int8_t* A, const uint8_t* B_packed, int32_t* C,
           int M, int N, int K,
