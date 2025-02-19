@@ -1,6 +1,7 @@
 #include "../../include/backend/common_tgemm.hpp"
 #include <cstdint>
 #include <cassert>
+#include <omp.h>
 
 /**
  * @brief Matrix multiplication using a packed ternary weight matrix.
@@ -30,25 +31,26 @@ void common_tgemm(const uint8_t* A_packed, const int8_t* B, int32_t* C,
     assert((K % 4) == 0 && "K must be divisible by 4 for packed matrix A.");
 
     // Iterate over each row of A.
-    for (int i = 0; i < M; ++i) {
+    #pragma omp parallel for collapse(2)
+    for (int m = 0; m < M; ++m) {
         // Iterate over each column of B.
-        for (int j = 0; j < N; ++j) {
+        for (int n = 0; n < N; ++n) {
             int32_t sum = 0;
 
             
             // Process each of the original K weights.
             for (int k = 0; k < K; k += 4) {
                 // Compute the index of the byte in the packed A.
-                uint8_t packed_byte = static_cast<uint8_t>(A_packed[i * lda + (k / 4)]);
+                uint8_t packed_byte = static_cast<uint8_t>(A_packed[m * lda + (k / 4)]);
 
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 6) & 0x03) - 1) * static_cast<int32_t>(B[k * ldb + j]);
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 4) & 0x03) - 1) * static_cast<int32_t>(B[(k + 1) * ldb + j]);
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 2) & 0x03) - 1) * static_cast<int32_t>(B[(k + 2) * ldb + j]);
-                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte) & 0x03) - 1) * static_cast<int32_t>(B[(k + 3) * ldb + j]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 6) & 0x03) - 1) * static_cast<int32_t>(B[k * ldb + m]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 4) & 0x03) - 1) * static_cast<int32_t>(B[(k + 1) * ldb + m]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte >> 2) & 0x03) - 1) * static_cast<int32_t>(B[(k + 2) * ldb + m]);
+                sum += static_cast<int32_t>(static_cast<int8_t>((packed_byte) & 0x03) - 1) * static_cast<int32_t>(B[(k + 3) * ldb + m]);
             }
 
             // Store the result in matrix C.
-            C[i * ldc + j] = sum;
+            C[m * ldc + n] = sum;
         }
     }
 }

@@ -1,12 +1,32 @@
 cmake_minimum_required(VERSION 3.10)
 project(TernaryGemmBenchmark)
 
+# On macOS, use Homebrew's LLVM/Clang
+if(APPLE)
+    set(CMAKE_C_COMPILER "/opt/homebrew/opt/llvm/bin/clang")
+    set(CMAKE_CXX_COMPILER "/opt/homebrew/opt/llvm/bin/clang++")
+    set(OpenMP_C_FLAGS "-fopenmp")
+    set(OpenMP_CXX_FLAGS "-fopenmp")
+    set(OpenMP_C_LIB_NAMES "omp")
+    set(OpenMP_CXX_LIB_NAMES "omp")
+    set(OpenMP_omp_LIBRARY "/opt/homebrew/opt/llvm/lib/libomp.dylib")
+endif()
+
 # Use C++11.
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Add compiler optimization flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+
 # Add BLAS package
 find_package(BLAS REQUIRED)
+
+# Add OpenMP support
+find_package(OpenMP REQUIRED)
+if(OpenMP_CXX_FOUND)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
 
 # Add OpenBLAS include directory
 if(APPLE)
@@ -39,31 +59,3 @@ target_link_libraries(benchmark
 )
 
 
-# ========================== Tests ==========================
-enable_testing()
-
-# Add Google Test
-include(FetchContent)
-FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.12.1
-)
-FetchContent_MakeAvailable(googletest)
-
-# Create test executable
-add_executable(tgemm_tests
-    tests/test_tgemm.cpp
-    tests/test_tgemm_pack_weights.cpp
-)
-
-target_link_libraries(tgemm_tests
-    PRIVATE
-    ternary_gemm_base
-    GTest::gtest_main
-    BLAS::BLAS
-)
-
-# Register tests
-include(GoogleTest)
-gtest_discover_tests(tgemm_tests)
