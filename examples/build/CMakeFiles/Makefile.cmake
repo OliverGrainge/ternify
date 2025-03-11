@@ -132,4 +132,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ternify.dir/DependInfo.cmake"
   "CMakeFiles/types.dir/DependInfo.cmake"
   "CMakeFiles/matmul.dir/DependInfo.cmake"
+  "CMakeFiles/relu.dir/DependInfo.cmake"
   )

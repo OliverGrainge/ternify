@@ -69,10 +69,24 @@ include CMakeFiles/ternify.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ternify.dir/flags.make
 
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o: CMakeFiles/ternify.dir/flags.make
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o: /Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o: CMakeFiles/ternify.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o -MF CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o.d -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o -c /Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp
+
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp > CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i
+
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s
+
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o: CMakeFiles/ternify.dir/flags.make
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o: /Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o: CMakeFiles/ternify.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o -MF CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o.d -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o -c /Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp
 
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.i: cmake_force
@@ -83,10 +97,24 @@ CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matm
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.s
 
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o: CMakeFiles/ternify.dir/flags.make
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o: /Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o: CMakeFiles/ternify.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o -MF CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o.d -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o -c /Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp
+
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp > CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i
+
+CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s
+
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o: CMakeFiles/ternify.dir/flags.make
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o: /Users/olivergrainge/Documents/github/ternify/src/types/types.cpp
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o: CMakeFiles/ternify.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o -MF CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o.d -o CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o -c /Users/olivergrainge/Documents/github/ternify/src/types/types.cpp
 
 CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.i: cmake_force
@@ -99,17 +127,21 @@ CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/ty
 
 # Object files for target ternify
 ternify_OBJECTS = \
+"CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o" \
 "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o" \
+"CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o" \
 "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o"
 
 # External object files for target ternify
 ternify_EXTERNAL_OBJECTS =
 
+libternify.a: CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o
 libternify.a: CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o
+libternify.a: CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o
 libternify.a: CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o
 libternify.a: CMakeFiles/ternify.dir/build.make
 libternify.a: CMakeFiles/ternify.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libternify.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libternify.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/ternify.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ternify.dir/link.txt --verbose=$(VERBOSE)
 

@@ -8,7 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o" "gcc" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o.d"
   "/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o" "gcc" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o.d"
+  "/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o" "gcc" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o.d"
   "/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o" "gcc" "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o.d"
   )
 

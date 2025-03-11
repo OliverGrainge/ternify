@@ -17,7 +17,9 @@ target_include_directories(ternify PUBLIC
 # Build an example executable from the example source file.
 add_executable(types types.cpp)
 add_executable(matmul matmul.cpp)
+add_executable(relu relu.cpp)
 
 # Link the example with the core library.
 target_link_libraries(types PRIVATE ternify)
 target_link_libraries(matmul PRIVATE ternify)
+target_link_libraries(relu PRIVATE ternify)

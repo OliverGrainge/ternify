@@ -155,6 +155,43 @@ matmul/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/matmul.dir/build.make CMakeFiles/matmul.dir/build
 .PHONY : matmul/fast
 
+#=============================================================================
+# Target rules for targets named relu
+
+# Build rule for target.
+relu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 relu
+.PHONY : relu
+
+# fast build rule for target.
+relu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/relu.dir/build.make CMakeFiles/relu.dir/build
+.PHONY : relu/fast
+
+Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.o: Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.o
+
+# target to build an object file
+Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o
+
+Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.i: Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.i
+
+# target to preprocess a source file
+Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.i
+
+Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.s: Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.s
+
+# target to generate assembly for a file
+Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.s
+
 Users/olivergrainge/Documents/github/ternify/src/ops/matmul.o: Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o
 .PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/matmul.o
 
@@ -178,6 +215,30 @@ Users/olivergrainge/Documents/github/ternify/src/ops/matmul.s: Users/olivergrain
 Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.s
 .PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.s
+
+Users/olivergrainge/Documents/github/ternify/src/ops/relu.o: Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/relu.o
+
+# target to build an object file
+Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o
+
+Users/olivergrainge/Documents/github/ternify/src/ops/relu.i: Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/relu.i
+
+# target to preprocess a source file
+Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.i
+
+Users/olivergrainge/Documents/github/ternify/src/ops/relu.s: Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/relu.s
+
+# target to generate assembly for a file
+Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ternify.dir/build.make CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s
+.PHONY : Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.s
 
 Users/olivergrainge/Documents/github/ternify/src/types/types.o: Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o
 .PHONY : Users/olivergrainge/Documents/github/ternify/src/types/types.o
@@ -227,6 +288,30 @@ matmul.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/matmul.dir/build.make CMakeFiles/matmul.dir/matmul.cpp.s
 .PHONY : matmul.cpp.s
 
+relu.o: relu.cpp.o
+.PHONY : relu.o
+
+# target to build an object file
+relu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/relu.dir/build.make CMakeFiles/relu.dir/relu.cpp.o
+.PHONY : relu.cpp.o
+
+relu.i: relu.cpp.i
+.PHONY : relu.i
+
+# target to preprocess a source file
+relu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/relu.dir/build.make CMakeFiles/relu.dir/relu.cpp.i
+.PHONY : relu.cpp.i
+
+relu.s: relu.cpp.s
+.PHONY : relu.s
+
+# target to generate assembly for a file
+relu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/relu.dir/build.make CMakeFiles/relu.dir/relu.cpp.s
+.PHONY : relu.cpp.s
+
 types.o: types.cpp.o
 .PHONY : types.o
 
@@ -260,17 +345,27 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... matmul"
+	@echo "... relu"
 	@echo "... ternify"
 	@echo "... types"
+	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.o"
+	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.i"
+	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.s"
 	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/matmul.o"
 	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/matmul.i"
 	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/matmul.s"
+	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/relu.o"
+	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/relu.i"
+	@echo "... Users/olivergrainge/Documents/github/ternify/src/ops/relu.s"
 	@echo "... Users/olivergrainge/Documents/github/ternify/src/types/types.o"
 	@echo "... Users/olivergrainge/Documents/github/ternify/src/types/types.i"
 	@echo "... Users/olivergrainge/Documents/github/ternify/src/types/types.s"
 	@echo "... matmul.o"
 	@echo "... matmul.i"
 	@echo "... matmul.s"
+	@echo "... relu.o"
+	@echo "... relu.i"
+	@echo "... relu.s"
 	@echo "... types.o"
 	@echo "... types.i"
 	@echo "... types.s"

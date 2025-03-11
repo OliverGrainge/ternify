@@ -1,5 +1,7 @@
-#include "ops/matmul.h"
 #include <cassert>
+
+#include "ops/matmul.h"
+
 
 void matmul(QT_S_I8_PT* Y, QT_S_I8_PT* A, QT_S_I8_PT* W, T_FP* B) {
     assert(A->cols == W->cols); 

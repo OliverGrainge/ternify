@@ -1,5 +1,6 @@
 /Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles/ternify.dir
 /Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles/types.dir
 /Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles/matmul.dir
+/Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles/relu.dir
 /Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles/edit_cache.dir
 /Users/olivergrainge/Documents/github/ternify/examples/build/CMakeFiles/rebuild_cache.dir

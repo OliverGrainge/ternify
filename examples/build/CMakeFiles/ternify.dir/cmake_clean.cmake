@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o"
+  "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/layernorm.cpp.o.d"
   "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o"
   "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/matmul.cpp.o.d"
+  "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o"
+  "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/ops/relu.cpp.o.d"
   "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o"
   "CMakeFiles/ternify.dir/Users/olivergrainge/Documents/github/ternify/src/types/types.cpp.o.d"
   "libternify.a"
