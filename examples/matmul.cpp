@@ -6,13 +6,18 @@
 
 void fill_data(int8_t *data, int n) {
     for (int i = 0; i < n; i++) {
-        data[i] = i; //(rand() % 256) - 128;  // Generate values from -128 to 127
+        data[i] = i; 
+    }
+}
+
+void fill_data(float *data, int n) {
+    for (int i = 0; i < n; i++) {
+        data[i] = 1.0f; 
     }
 }
 
 void fill_scales(float *scales, int n) {
     for (int i = 0; i < n; i++) {
-        //scales[i] = (float)rand() / (float)RAND_MAX;
         scales[i] = 1.0f;
     }
 }
@@ -53,6 +58,9 @@ int main() {
     int8_t *W_data = new int8_t[N * K]; 
     float *W_scales = new float[1];
 
+    float *B_data = new float[N]; 
+    fill_data(B_data, N); 
+
     int8_t *Y_data = new int8_t[N * M]; 
     float *Y_scales = new float[1];
 
@@ -62,14 +70,18 @@ int main() {
     fill_data(W_data, N * K); 
     fill_scales(W_scales, 1);
 
+    fill_data(B_data, N); 
+
     fill_data(Y_data, M * N); 
     fill_scales(Y_scales, 1);  
 
     QT_S_I8_PT *A = new QT_S_I8_PT(A_data, A_scales, M, K); 
     QT_S_I8_PT *W = new QT_S_I8_PT(W_data, W_scales, N, K); 
+    T_FP *B = new T_FP(B_data, N, 1); 
     QT_S_I8_PT *Y = new QT_S_I8_PT(Y_data, Y_scales, M, N); 
 
-    matmul(A, W, Y);
+    matmul(Y, A, W, B);
+
     std::cout << "A: " << std::endl;
     print_matrix(A_data, M, K);
     std::cout << "W: " << std::endl;

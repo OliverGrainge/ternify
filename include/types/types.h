@@ -4,6 +4,16 @@
 #include <vector>
 #include <cstdint>
 
+
+struct T_FP {
+    float *data;
+    int rows;
+    int cols;
+
+    T_FP(float* d, int r, int c) 
+        : data(d), rows(r), cols(c) {}
+};
+
 // === Per-Tensor Quantization ===
 struct QT_S_I8_PT { // Symmetric Int8 Per-Tensor
     int8_t *data;

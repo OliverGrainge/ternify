@@ -1,7 +1,7 @@
 #include "ops/matmul.h"
 #include <cassert>
 
-void matmul(QT_S_I8_PT* A, QT_S_I8_PT* W, QT_S_I8_PT* Y) {
+void matmul(QT_S_I8_PT* Y, QT_S_I8_PT* A, QT_S_I8_PT* W, T_FP* B) {
     assert(A->cols == W->cols); 
     assert(Y->rows == A->rows);
     assert(Y->cols == W->rows); 
@@ -14,7 +14,12 @@ void matmul(QT_S_I8_PT* A, QT_S_I8_PT* W, QT_S_I8_PT* Y) {
             for (k = 0; k < A->cols; k++) {
                 acc += A->data[m * A->cols + k] * W->data[n * W->cols + k];
             }
-            Y->data[m * Y->cols + n] = acc * scale;
+            // Add bias if provided
+            float result = acc * scale;
+            if (B != nullptr) {
+                result += B->data[n];
+            }
+            Y->data[m * Y->cols + n] = result;
         }
     }
 }
