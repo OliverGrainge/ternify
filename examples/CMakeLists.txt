@@ -32,6 +32,7 @@ add_executable(layer_gelu layers/gelu.cpp)
 add_executable(layer_softmax layers/softmax.cpp)
 add_executable(layer_layernorm layers/layernorm.cpp)
 add_executable(layer_add layers/add.cpp)
+add_executable(mlp integration/mlp.cpp)
 
 
 # Set specific output directory for activation function executables
@@ -44,6 +45,12 @@ set_target_properties(layer_linear layer_relu layer_gelu layer_softmax layer_lay
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/layers
 )
+
+set_target_properties(mlp
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/integration
+)
+
 
 # Link the example with the core library.
 target_link_libraries(types PRIVATE ternify)
@@ -59,3 +66,5 @@ target_link_libraries(layer_gelu PRIVATE ternify)
 target_link_libraries(layer_softmax PRIVATE ternify)
 target_link_libraries(layer_layernorm PRIVATE ternify)
 target_link_libraries(layer_add PRIVATE ternify)
+
+target_link_libraries(mlp PRIVATE ternify)
