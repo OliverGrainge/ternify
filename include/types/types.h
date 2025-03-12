@@ -94,13 +94,13 @@ struct QT_S_T_PG { // Ternary Per-Group
         : data(d), scales(s), rows(r), cols(c), group_size(gs) {}
 };
 
+void free_T(T_FP *t); 
 void free_QT(QT_S_I8_PT *qt);
 void free_QT(QT_S_T_PT *qt);
 void free_QT(QT_S_I8_PC *qt);
 void free_QT(QT_S_T_PC *qt);
 void free_QT(QT_S_I8_PG *qt);
 void free_QT(QT_S_T_PG *qt);
-
 
 
 #endif // TYPES_H

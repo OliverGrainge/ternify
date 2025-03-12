@@ -3,6 +3,28 @@
 #include "ops/matmul.h"
 
 
+void matmul(T_FP* Y, T_FP* A, T_FP* W, T_FP* B) {
+    assert(A->cols == W->cols); 
+    assert(Y->rows == A->rows);
+    assert(Y->cols == W->rows); 
+
+    int m, n, k; 
+    for (m = 0; m < A->rows; m++) {
+        for (n = 0; n < W->rows; n++) {
+            float acc = 0;
+            for (k = 0; k < A->cols; k++) {
+                acc += A->data[m * A->cols + k] * W->data[n * W->cols + k];
+            }
+            if (B != nullptr) {
+                acc += B->data[n];
+            }
+            Y->data[m * Y->cols + n] = acc;
+        }
+    }
+}
+
+
+
 void matmul(QT_S_I8_PT* Y, QT_S_I8_PT* A, QT_S_I8_PT* W, T_FP* B) {
     assert(A->cols == W->cols); 
     assert(Y->rows == A->rows);

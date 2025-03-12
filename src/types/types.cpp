@@ -47,3 +47,10 @@ void free_QT(QT_S_T_PG* qt) {
         delete qt;
     }
 }
+
+void free_T(T_FP* t) {
+    if (t) {
+        delete[] t->data;
+        delete t;
+    }
+}
