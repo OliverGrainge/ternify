@@ -10,7 +10,6 @@ LayerNorm::LayerNorm(int dim, float eps) {
 }
 
 
-
 void LayerNorm::forward(T_FP* Y, T_FP* A) {
     layernorm(Y, A, this->weight, this->bias, this->eps); 
 }

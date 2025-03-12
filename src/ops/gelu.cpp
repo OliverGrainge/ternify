@@ -5,7 +5,6 @@
 #include "ops/gelu.h" 
 
 
-
 void gelu(T_FP* Y, T_FP* A) {
     assert(Y->rows == A->rows);
     assert(Y->cols == A->cols);
@@ -19,7 +18,6 @@ void gelu(T_FP* Y, T_FP* A) {
         Y->data[i] = 0.5f * x * (1.0f + std::tanh(sqrt_2_over_pi * (x + coef * x_cubed)));
     }
 }
-
 
 
 void gelu(QT_S_I8_PT* Y, QT_S_I8_PT* A) {

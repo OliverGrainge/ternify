@@ -31,6 +31,7 @@ add_executable(layer_relu layers/relu.cpp)
 add_executable(layer_gelu layers/gelu.cpp)
 add_executable(layer_softmax layers/softmax.cpp)
 add_executable(layer_layernorm layers/layernorm.cpp)
+add_executable(layer_add layers/add.cpp)
 
 
 # Set specific output directory for activation function executables
@@ -39,7 +40,7 @@ set_target_properties(types matmul relu layernorm gelu softmax
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/ops
 )
 
-set_target_properties(layer_linear layer_relu layer_gelu layer_softmax layer_layernorm
+set_target_properties(layer_linear layer_relu layer_gelu layer_softmax layer_layernorm layer_add
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/layers
 )
@@ -57,3 +58,4 @@ target_link_libraries(layer_relu PRIVATE ternify)
 target_link_libraries(layer_gelu PRIVATE ternify)
 target_link_libraries(layer_softmax PRIVATE ternify)
 target_link_libraries(layer_layernorm PRIVATE ternify)
+target_link_libraries(layer_add PRIVATE ternify)
