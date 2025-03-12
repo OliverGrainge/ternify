@@ -2,10 +2,10 @@
 #include <cmath>  // for std::pow
 #include <cassert>
 
-void layernorm(T_FP *Y, T_FP *A, T_FP *scale, T_FP *bias, float eps) {
+void layernorm(T_FP *Y, T_FP *A, T_FP *weight, T_FP *bias, float eps) {
     assert(A->rows == Y->rows);
     assert(A->cols == Y->cols);
-    assert(scale->cols == A->cols);
+    assert(weight->cols == A->cols);
     assert(bias->cols == A->cols);
 
     for (int m = 0; m < A->rows; m++) {
@@ -30,8 +30,8 @@ void layernorm(T_FP *Y, T_FP *A, T_FP *scale, T_FP *bias, float eps) {
         // Third pass: normalize and apply scale/bias
         for (int k = 0; k < A->cols; k++) {
             Y->data[m * A->cols + k] = (A->data[m * A->cols + k] - mean) * inv_std;
-            if (scale != nullptr) {
-                Y->data[m * A->cols + k] *= scale->data[k];
+            if (weight != nullptr) {
+                Y->data[m * A->cols + k] *= weight->data[k];
             }
             if (bias != nullptr) {
                 Y->data[m * A->cols + k] += bias->data[k];
@@ -43,10 +43,10 @@ void layernorm(T_FP *Y, T_FP *A, T_FP *scale, T_FP *bias, float eps) {
 
 
 
-void layernorm(QT_S_I8_PT *Y, QT_S_I8_PT *A, T_FP *scale, T_FP *bias, float eps) {
+void layernorm(QT_S_I8_PT *Y, QT_S_I8_PT *A, T_FP *weight, T_FP *bias, float eps) {
     assert(A->rows == Y->rows);
     assert(A->cols == Y->cols);
-    assert(scale->cols == A->cols);
+    assert(weight->cols == A->cols);
     assert(bias->cols == A->cols);
 
     for (int m = 0; m < A->rows; m++) {
@@ -71,8 +71,8 @@ void layernorm(QT_S_I8_PT *Y, QT_S_I8_PT *A, T_FP *scale, T_FP *bias, float eps)
         // Third pass: normalize and apply scale/bias
         for (int k = 0; k < A->cols; k++) {
             float ytmp = (A->data[m * A->cols + k] * A->scales[0] - mean) * inv_std;
-            if (scale != nullptr) {
-                ytmp *= scale->data[k];
+            if (weight != nullptr) {
+                ytmp *= weight->data[k];
             }
             if (bias != nullptr) {
                 ytmp += bias->data[k];

@@ -53,7 +53,7 @@ int main() {
     QT_S_I8_PT *A = new QT_S_I8_PT(data, scales, rows, cols); 
     std::cout << "Before ReLU:" << std::endl;
     print_matrix(data, rows, cols);
-    relu(A);
+    relu(A, A);
     std::cout << "After ReLU:" << std::endl;
     print_matrix(data, rows, cols);
 
